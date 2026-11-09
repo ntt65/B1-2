@@ -35,20 +35,25 @@ export default function ProfilePage() {	// 프로필 페이지 컴포넌트 정�
   }
 
   return (
-    <div style={{ maxWidth: 560, margin: '0 auto' }}>	// 중앙 정렬 박스 컨테이너
-      <h1 style={{ fontSize: 22, marginBottom: 20 }}>내 프로필</h1>	// 페이지 제목
-      {error && <div style={{ marginBottom: 16 }}><ErrorBanner message={error} /></div>}	// 에러 배너
-      <section style={{ padding: 24, background: '#fff', border: '1px solid #e5e7eb', borderRadius: 8 }}>	// 프로필 카드 영역
-        <dl style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 12, margin: 0 }}>	// 설명 목록 그리드
-          <dt style={{ fontWeight: 700 }}>표시 이름</dt>	// 항목명
-          <dd style={{ margin: 0 }}>{user.user_metadata?.display_name || '설정 안 함'}</dd>	// 사용자 메타데이터 이름
-          <dt style={{ fontWeight: 700 }}>이메일</dt>	// 항목명
-          <dd style={{ margin: 0 }}>{user.email}</dd>	// 이메일 주소
-          <dt style={{ fontWeight: 700 }}>가입일</dt>	// 항목명
-          <dd style={{ margin: 0 }}>{user.created_at ? new Date(user.created_at).toLocaleString('ko-KR') : '-'}</dd>	// 포맷팅된 가입 일시
+    <div style={{ maxWidth: 560, margin: '0 auto' }}>
+      {/* 페이지 제목 */}
+      <h1 style={{ fontSize: 22, marginBottom: 20 }}>내 프로필</h1>
+      {/* 에러 배너 */}
+      {error && <div style={{ marginBottom: 16 }}><ErrorBanner message={error} /></div>}
+      {/* 프로필 카드 영역 */}
+      <section style={{ padding: 24, background: '#fff', border: '1px solid #e5e7eb', borderRadius: 8 }}>
+        {/* 설명 목록 그리드 */}
+        <dl style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 12, margin: 0 }}>
+          <dt style={{ fontWeight: 700 }}>표시 이름</dt>
+          <dd style={{ margin: 0 }}>{user.user_metadata?.display_name || '설정 안 함'}</dd>
+          <dt style={{ fontWeight: 700 }}>이메일</dt>
+          <dd style={{ margin: 0 }}>{user.email}</dd>
+          <dt style={{ fontWeight: 700 }}>가입일</dt>
+          <dd style={{ margin: 0 }}>{user.created_at ? new Date(user.created_at).toLocaleString('ko-KR') : '-'}</dd>
         </dl>
-        <button type="button" onClick={handleSignOut} disabled={submitting} style={{ marginTop: 24, padding: '8px 16px', border: '1px solid #d1d5db', borderRadius: 6, background: '#fff', cursor: submitting ? 'not-allowed' : 'pointer' }}>	// 로그아웃 버튼
-          {submitting ? '로그아웃 중…' : '로그아웃'}	// 진행 중 텍스트 분기
+        {/* 로그아웃 버튼 */}
+        <button type="button" onClick={handleSignOut} disabled={submitting} style={{ marginTop: 24, padding: '8px 16px', border: '1px solid #d1d5db', borderRadius: 6, background: '#fff', cursor: submitting ? 'not-allowed' : 'pointer' }}>
+          {submitting ? '로그아웃 중…' : '로그아웃'}
         </button>
       </section>
     </div>

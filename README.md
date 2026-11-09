@@ -1,8 +1,8 @@
-# B4-2: 버튼 누르면 화면이 스르륵 바뀌는 요즘 웹사이트 만들기
+# B1-2: 버튼 누르면 화면이 스르륵 바뀌는 요즘 웹사이트 만들기
 
-> **배포 URL**: <https://b4-2.vercel.app/items>
+> **배포 URL**: <https://b1-2-puce.vercel.app/items>
 >
-> **GitHub**: <https://github.com/giyeop-cody/B4-2>
+> **GitHub**: <https://github.com/ntt65/B1-2>
 
 
 <!-- codyssey-links:start -->

@@ -82,6 +82,7 @@ export default function LoginPage() {	// 로그인/회원가입 페이지 컴포
   if (!authAvailable) {	// Supabase 키가 없어 인증을 사용할 수 없는 상태일 때
     return (
       <div>
+        {/* Supabase 인증 미설정 안내 화면 */}
         <h1 style={{ fontSize: 22, marginBottom: 20 }}>로그인</h1>
         <ErrorBanner message="Supabase 인증 설정이 없습니다. 환경변수를 확인하세요." />
         <Link to="/items" style={{ display: 'inline-block', marginTop: 16, color: '#2563eb' }}>목록으로 돌아가기</Link>
@@ -90,33 +91,43 @@ export default function LoginPage() {	// 로그인/회원가입 페이지 컴포
   }
 
   return (
-    <div style={{ maxWidth: 480, margin: '0 auto' }}>	// 로그인 폼 중앙 정렬 컨테이너
-      <h1 style={{ fontSize: 22, marginBottom: 8 }}>{mode === 'signin' ? '로그인' : '회원가입'}</h1>	// 모드별 타이틀
+    <div style={{ maxWidth: 480, margin: '0 auto' }}>
+      {/* 모드별 타이틀 (로그인 / 회원가입) */}
+      <h1 style={{ fontSize: 22, marginBottom: 8 }}>{mode === 'signin' ? '로그인' : '회원가입'}</h1>
+      {/* 인증 안내 문구 */}
       <p style={{ color: '#666', fontSize: 14, marginBottom: 20 }}>
-        Supabase Auth로 사용자 상태를 확인합니다.	// 인증 안내 문구
+        Supabase Auth로 사용자 상태를 확인합니다.
       </p>
-      <form noValidate onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24, background: '#fff', border: '1px solid #e5e7eb', borderRadius: 8 }}>	// 입력 폼
-        {(formError || sessionError) && <ErrorBanner message={formError || sessionError} />}	// 에러 배너
-        {successMessage && <p role="status" style={{ padding: 12, color: '#166534', background: '#dcfce7', borderRadius: 6 }}>{successMessage}</p>}	// 성공 메시지
-        {mode === 'signup' && (	// 회원가입 모드일 때만 표시되는 이름 입력창
+      {/* 입력 폼 */}
+      <form noValidate onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24, background: '#fff', border: '1px solid #e5e7eb', borderRadius: 8 }}>
+        {/* 에러 배너 */}
+        {(formError || sessionError) && <ErrorBanner message={formError || sessionError} />}
+        {/* 성공 메시지 */}
+        {successMessage && <p role="status" style={{ padding: 12, color: '#166534', background: '#dcfce7', borderRadius: 6 }}>{successMessage}</p>}
+        {/* 회원가입 모드일 때만 표시되는 이름 입력창 */}
+        {mode === 'signup' && (
           <div>
             <label htmlFor="display-name" style={{ display: 'block', fontWeight: 600, fontSize: 14, marginBottom: 6 }}>표시 이름</label>
             <input id="display-name" value={displayName} onChange={(event) => setDisplayName(event.target.value)} autoComplete="name" style={{ width: '100%', padding: 10, border: '1px solid #d1d5db', borderRadius: 6 }} />
           </div>
         )}
+        {/* 이메일 입력 그룹 */}
         <div>
-          <label htmlFor="auth-email" style={{ display: 'block', fontWeight: 600, fontSize: 14, marginBottom: 6 }}>이메일</label>	// 이메일 라벨
+          <label htmlFor="auth-email" style={{ display: 'block', fontWeight: 600, fontSize: 14, marginBottom: 6 }}>이메일</label>
           <input id="auth-email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" style={{ width: '100%', padding: 10, border: '1px solid #d1d5db', borderRadius: 6 }} />
         </div>
+        {/* 비밀번호 입력 그룹 */}
         <div>
-          <label htmlFor="auth-password" style={{ display: 'block', fontWeight: 600, fontSize: 14, marginBottom: 6 }}>비밀번호</label>	// 비밀번호 라벨
+          <label htmlFor="auth-password" style={{ display: 'block', fontWeight: 600, fontSize: 14, marginBottom: 6 }}>비밀번호</label>
           <input id="auth-password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete={mode === 'signin' ? 'current-password' : 'new-password'} style={{ width: '100%', padding: 10, border: '1px solid #d1d5db', borderRadius: 6 }} />
         </div>
-        <button type="submit" disabled={submitting} style={{ padding: 10, border: 0, borderRadius: 6, color: '#fff', background: '#2563eb', fontWeight: 600, cursor: submitting ? 'not-allowed' : 'pointer', opacity: submitting ? 0.65 : 1 }}>	// 전송 버튼
-          {submitting ? '처리 중…' : mode === 'signin' ? '로그인' : '가입하기'}	// 버튼 라벨
+        {/* 전송 버튼 */}
+        <button type="submit" disabled={submitting} style={{ padding: 10, border: 0, borderRadius: 6, color: '#fff', background: '#2563eb', fontWeight: 600, cursor: submitting ? 'not-allowed' : 'pointer', opacity: submitting ? 0.65 : 1 }}>
+          {submitting ? '처리 중…' : mode === 'signin' ? '로그인' : '가입하기'}
         </button>
       </form>
-      <button type="button" onClick={changeMode} style={{ marginTop: 16, border: 0, background: 'transparent', color: '#2563eb', cursor: 'pointer' }}>	// 모드 전환 링크 버튼
+      {/* 모드 전환 링크 버튼 */}
+      <button type="button" onClick={changeMode} style={{ marginTop: 16, border: 0, background: 'transparent', color: '#2563eb', cursor: 'pointer' }}>
         {mode === 'signin' ? '계정이 없나요? 회원가입' : '이미 계정이 있나요? 로그인'}
       </button>
     </div>
