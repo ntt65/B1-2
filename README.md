@@ -50,10 +50,40 @@ React 18, React Router 7, Supabase로 만든 아이템 CRUD SPA다. LocalStorage
 - Playwright 로컬 브라우저 흐름 2개 + 배포 익명 권한 검사
 - 실제 Supabase CRUD 실증 검사 스크립트
 
+## 📚 B1-2 추가 진행 내역 및 학습 지원
+
+2026-11 신규 저장소(`ntt65/B1-2`)로 이전 후 수행된 추가 개선 및 학습 지원 작업 내역입니다.
+
+### 1. 초보자 친화적 전체 소스 코드 주석화
+- **파일 상단 JSDoc 요약**: `src/` 내 모든 페이지, 컴포넌트, 훅, 컨텍스트 상단에 역할과 책임을 한눈에 파악할 수 있는 한국어 요약 작성
+- **1:1 상세 인라인 설명**: React/JavaScript 입문자가 코드를 읽으며 바로 이해할 수 있도록 라인별 설명 추가 (1탭 공백 분리)
+- **React 정석 JSX 주석(`{/* ... */}`) 적용**: 브라우저 화면에 주석이 텍스트로 노출되어 레이아웃이 깨지던 문제를 해결하고, JSX 내부 주석을 표준 블록 주석 형태로 완벽 변환
+
+### 2. 맞춤형 React & Supabase 기초 학습 가이드 (`docs/study/`)
+React를 처음 접하는 학습자를 위해 단계별 학습 가이드 5편을 작성하여 수록했습니다.
+- [`01-react-core-mental-model.md`](docs/study/01-react-core-mental-model.md): React의 멘탈 모델 (컴포넌트 단위 사고, 가상 DOM, JSX 기초)
+- [`02-project-structure-tour.md`](docs/study/02-project-structure-tour.md): B1-2 디렉터리 구조 탐방 (pages, components, hooks, context, lib의 역할 분담)
+- [`03-hooks-and-state-explained.md`](docs/study/03-hooks-and-state-explained.md): 상태 관리와 훅 완벽 이해 (`useState`, `useEffect`, `useMemo`, `useCallback`)
+- [`04-backend-and-auth-tour.md`](docs/study/04-backend-and-auth-tour.md): Supabase 원격 DB와 이메일 인증의 동작 원리
+- [`05-hands-on-experiment-guide.md`](docs/study/05-hands-on-experiment-guide.md): 직접 코드를 수정해보며 체득하는 7가지 실습 시나리오
+
+### 3. GitHub 이슈 기반 Git Flow 협업 체계 확립
+- **이슈 기반 체크리스트 관리**: 기능 단위 GitHub 이슈 `#1` ~ `#8` 생성 및 세부 체크리스트 정의
+- **브랜치 전략 (Git Flow)**:
+  - 기능 개발 브랜치: `feat/#1-setup` ~ `feat/#8-documentation`
+  - 통합 브랜치: `develop`
+  - 프로덕션 배포 브랜치: `main`
+- **PR 및 릴리즈**: Pull Request `#9` ~ `#17`을 통해 단계별 코드 리뷰 및 머지 완료
+
+### 4. 배포 및 저장소 메타데이터 최신화
+- **공식 배포 URL**: <https://b1-2-puce.vercel.app/>
+- **GitHub 저장소**: <https://github.com/ntt65/B1-2>
+- **Supabase 원격 연동**: Supabase Auth 및 PostgreSQL RLS 연동 완료 (`Supabase 원격` 뱃지 활성화)
+
 ## 기술 스택
 
 - React 18.3
-- React Router 7.18 (`HashRouter`)
+- React Router 7.18 (`BrowserRouter`)
 - Supabase JavaScript SDK 2
 - Vite 6
 - Vitest, React Testing Library, Playwright
@@ -80,7 +110,7 @@ cp .env.example .env.local
 ```dotenv
 VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_ANON_KEY=your-publishable-or-anon-key
-VITE_APP_URL=https://b4-2.vercel.app
+VITE_APP_URL=https://b1-2-puce.vercel.app
 VITE_ALLOW_LOCAL_DB=false
 ```
 
@@ -145,7 +175,7 @@ BrowserRouter를 사용하므로 배포 주소의 경로는 `/#/...` 뒤에 표�
 | 7 | `/profile` | 로그인 사용자 보호 화면 |
 | 8 | `*` | 404 Not Found |
 
-정식 목록 주소는 `https://b4-2.vercel.app/items`다. HashRouter 시절에는 `#/` 경로가 필요했지만 BrowserRouter 전환 후 불필요해졌다. BrowserRouter는 URL에 `#`이 없고 Vercel rewrite 규칙으로 새로고침도 정상 동작한다.
+정식 목록 주소는 `https://b1-2-puce.vercel.app/items`다. HashRouter 시절에는 `#/` 경로가 필요했지만 BrowserRouter 전환 후 불필요해졌다. BrowserRouter는 URL에 `#`이 없고 Vercel rewrite 규칙으로 새로고침도 정상 동작한다.
 
 ## 프로젝트 구조
 
@@ -274,15 +304,15 @@ SQL 파일을 Git에 추가한 것과 실제 원격 데이터베이스에 적용
 
 Supabase 이메일 로그인/가입과 전역 사용자 Context를 구현했다. 원격 모드에서 `/items/new`, `/items/:id/edit`, `/profile`은 보호 라우트다. 비로그인 사용자는 목록·상세를 조회할 수 있지만 등록 CTA를 누르면 로그인으로 이동하고 수정·삭제 메뉴는 보이지 않는다. 명시적으로 켠 LocalStorage 학습 모드는 Supabase 계정 없이 CRUD 흐름을 연습할 수 있다. 2026-08-14 공개 Auth 설정 검사에서 이메일 제공자와 회원가입이 활성화됐고, 가입 뒤 이메일 확인이 필요한 상태임을 확인했다.
 
-회원가입 요청은 `VITE_APP_URL`을 `emailRedirectTo`로 전달한다. 값이 없으면 현재 브라우저 Origin을 사용한다. Supabase가 인증 토큰을 URL hash에 붙일 수 있고 앱도 BrowserRouter를 사용하므로 `/#/login` 경로는 넣지 않고 `https://b4-2.vercel.app` Origin만 사용한다.
+회원가입 요청은 `VITE_APP_URL`을 `emailRedirectTo`로 전달한다. 값이 없으면 현재 브라우저 Origin을 사용한다. Supabase가 인증 토큰을 URL hash에 붙일 수 있고 앱도 BrowserRouter를 사용하므로 `/#/login` 경로는 넣지 않고 `https://b1-2-puce.vercel.app` Origin만 사용한다.
 
 2026-08-14 프로젝트 소유자가 Supabase Dashboard의 다음 값을 최종 확인했다.
 
-1. `Authentication → URL Configuration → Site URL`: `https://b4-2.vercel.app`
-2. `Redirect URLs`: `https://b4-2.vercel.app/**` 허용
+1. `Authentication → URL Configuration → Site URL`: `https://b1-2-puce.vercel.app`
+2. `Redirect URLs`: `https://b1-2-puce.vercel.app/**` 허용
 3. localhost 주소는 로컬 인증 메일을 시험할 때만 별도 사용
 
-실제 새 인증 이메일도 수신해 링크가 localhost가 아니라 `https://b4-2.vercel.app` Production으로 복귀하는 것을 확인했다.
+실제 새 인증 이메일도 수신해 링크가 localhost가 아니라 `https://b1-2-puce.vercel.app` Production으로 복귀하는 것을 확인했다.
 
 코드의 `emailRedirectTo`가 허용 목록에 없으면 Supabase가 Dashboard의 Site URL로 돌아갈 수 있다. 프론트엔드 UI·보호 라우트·API 세션 검사는 실수와 정상 화면 접근을 막는 여러 겹의 방어다. 개발자 도구나 직접 HTTP 요청까지 막는 최종 데이터 권한은 위 RLS를 실제 원격 DB에 적용해 확인했다.
 
@@ -325,7 +355,7 @@ Supabase 이메일 로그인/가입과 전역 사용자 Context를 구현했다.
 
 ### 준비
 
-1. <https://b4-2.vercel.app/items> 접속 — 로그아웃 상태에서 시작
+1. <https://b1-2-puce.vercel.app/items> 접속 — 로그아웃 상태에서 시작
 2. F12 → **Network** 탭 → **Throttling** 드롭다운 위치 확인
 3. 매 시나리오 끝나면 새로고침
 
@@ -381,7 +411,7 @@ Vercel 프로젝트에 다음 환경변수를 등록한다.
 
 - `VITE_SUPABASE_URL`
 - `VITE_SUPABASE_ANON_KEY`
-- `VITE_APP_URL=https://b4-2.vercel.app`
+- `VITE_APP_URL=https://b1-2-puce.vercel.app`
 - `VITE_ALLOW_LOCAL_DB=false`
 
 배포 순서는 다음과 같다.
