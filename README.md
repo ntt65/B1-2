@@ -467,6 +467,7 @@ Vercel 프로젝트에 다음 환경변수를 등록한다.
 ## 학습·이슈·평가 기록
 
 - [LEARNING.md](LEARNING.md): 기초 학습과 과거 진행 기록
+- [B1_2_simple과 구현 차이 비교](docs/comparison-b1-2-simple.md): 복잡해진 이유, 필수·추가 범위, 단순화 후보
 - [실증 검사](docs/audit/2026-08-14-requirements-audit.md)
 - [이슈 목록](docs/issues/README.md)
 - [멘토·학습 동료 페르소나 검토](docs/mentoring/2026-08-14-first-review.md)
