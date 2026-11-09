@@ -80,6 +80,24 @@ React를 처음 접하는 학습자를 위해 단계별 학습 가이드 5편을
 - **GitHub 저장소**: <https://github.com/ntt65/B1-2>
 - **Supabase 원격 연동**: Supabase Auth 및 PostgreSQL RLS 연동 완료 (`Supabase 원격` 뱃지 활성화)
 
+### 5. 실서비스 동작 및 기능 검증 스크린샷
+배포된 프로덕션 사이트([https://b1-2-puce.vercel.app/](https://b1-2-puce.vercel.app/))에서 Supabase 인증 및 원격 CRUD 동작을 직접 검증한 실제 화면입니다.
+
+| 1. 로그인 폼 (`/login`) | 2. 프로필 화면 (`/profile`) |
+|:---:|:---:|
+| ![로그인](screenshot/01-login.png) | ![내 프로필](screenshot/02-profile.png) |
+| **Supabase Auth 이메일/비밀번호 로그인** | **로그인 세션 확인 및 사용자 프로필** |
+
+| 3. 첫 아이템 등록 후 목록 (`/items`) | 4. 새 아이템 등록 폼 (`/items/new`) |
+|:---:|:---:|
+| ![첫 아이템 등록](screenshot/03-item-list-initial.png) | ![새 아이템 등록 폼](screenshot/04-item-create.png) |
+| **원격 DB 1건 등록 반영 및 카테고리 필터** | **controlled form 유효성 검사 및 전송** |
+
+| 5. 아이템 상세 조회 (`/items/:id`) | 6. 복수 아이템 목록 (`/items`) |
+|:---:|:---:|
+| ![아이템 상세](screenshot/05-item-detail.png) | ![복수 아이템 목록](screenshot/06-item-list-multi.png) |
+| **UUID 기준 단일 아이템 조회 및 수정/삭제 CTA** | **복수 아이템 렌더링 및 전체(2) 카운트 반영** |
+
 ## 기술 스택
 
 - React 18.3
